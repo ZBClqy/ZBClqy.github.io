@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>xlsx-js-style的简单封装 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">xlsx-js-style的简单封装</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><p>import XLSXS from ‘xlsx-js-style’</p>
+<p>引入模块</p>
+<p>export const exportExecl &#x3D; (data,dataTitle,rowWidth,rowAlignment,sheetName,fileName,footerData &#x3D; null)&#x3D;&gt;{</p>
+<p>  const workbook &#x3D; XLSXS.utils.book_new()&#x2F;&#x2F; 创建虚拟的 workbook</p>
+<p> 创建一个book </p>
+<p> for (let k &#x3D; 0;k &lt; data.length;k++) {</p>
+<p>​    const body &#x3D; []</p>
+<p>​	然后循环我们的data数据数组将每组数据扁平化拿出来</p>
+<p>​    for (let i &#x3D; 0;i &lt; data[k].length;i++) {</p>
+<p>​      let keys &#x3D; Object.keys(data[k][i])</p>
+<p>​      let item &#x3D; []</p>
+<p>​      for (let j &#x3D; 0;j &lt; keys.length;j++) {</p>
+<p>​        item.push(data[k][i][keys[j]])</p>
+<p>​      }</p>
+<p>​      body.push(item)</p>
+<p>​    }</p>
+<p>​    const header &#x3D; []</p>
+<p>​	设置我们的头部信息</p>
+<p>​    for (let i &#x3D; 0;i &lt; dataTitle.length;i++) {</p>
+<p>​      header.push(</p>
+<p>​        {</p>
+<p>​          v: dataTitle[i],</p>
+<p>​          t: ‘s’,</p>
+<p>​          s: {</p>
+<p>​          &#x2F;&#x2F; font 字体属性</p>
+<p>​            font: {</p>
+<p>​              bold: true,</p>
+<p>​              sz: 14,</p>
+<p>​              name: ‘宋体’,</p>
+<p>​            },</p>
+<p>​            &#x2F;&#x2F; alignment 对齐方式</p>
+<p>​            alignment: {</p>
+<p>​              vertical: ‘center’, &#x2F;&#x2F; 垂直居中</p>
+<p>​              horizontal: ‘center’, &#x2F;&#x2F; 水平居中</p>
+<p>​            },</p>
+<p>​          },</p>
+<p>​        }</p>
+<p>​      )</p>
+<p>​    }</p>
+<p>​    body.unshift(header)</p>
+<p>​	随后将我们的头部加入到我们的body中</p>
+<p>​    if (footerData) {</p>
+<p>​	判断是否有尾部信息有的话对其进行封装</p>
+<p>​      if (footerData[k]) {</p>
+<p>​        const footer &#x3D; []</p>
+<p>​        const keys &#x3D; Object.keys(footerData[k])</p>
+<p>​        for (let i &#x3D; 0;i &lt; keys.length;i++) {</p>
+<p>​          footer.push(</p>
+<p>​            {</p>
+<p>​              v: footerData[k][keys[i]],</p>
+<p>​              t: ‘s’,</p>
+<p>​              s: {</p>
+<p>​                &#x2F;&#x2F; font 字体属性</p>
+<p>​                font: {</p>
+<p>​                  bold: true,</p>
+<p>​                },</p>
+<p>​                &#x2F;&#x2F; alignment 对齐方式</p>
+<p>​                alignment: {</p>
+<p>​                  vertical: ‘center’, &#x2F;&#x2F; 垂直居中</p>
+<p>​                  horizontal: ‘center’, &#x2F;&#x2F; 水平居中</p>
+<p>​                },</p>
+<p>​              },</p>
+<p>​            }</p>
+<p>​          )</p>
+<p>​        }</p>
+<p>​        body.push(footer)</p>
+<p>​      }</p>
+<p>​    }</p>
+<p>​     对我们的主题信息进行格式转换为sheet数据</p>
+<p>​    const sheet &#x3D; XLSX.utils.aoa_to_sheet(body)</p>
+<p>  下面对我们的对其进行样式设置</p>
+<p>​    const AlignmentKeys &#x3D; Object.keys(rowAlignment)</p>
+<p>​    const sheetKeys &#x3D; Object.keys(sheet)</p>
+<p>​    for (let i &#x3D; 0;i &lt; AlignmentKeys.length;i++) {</p>
+<p>​      for (let j &#x3D; 0;j &lt; sheetKeys.length;j++) {</p>
+<p>​        if (sheetKeys[j].indexOf(AlignmentKeys[i]) !&#x3D; -1 &amp;&amp; sheetKeys[j] !&#x3D; (AlignmentKeys[i] + ‘1’)) {</p>
+<p>​          sheet[sheetKeys[j]].s &#x3D; {</p>
+<p>​            alignment: {</p>
+<p>​              vertical: ‘center’, &#x2F;&#x2F; 垂直居中</p>
+<p>​              horizontal: rowAlignment[AlignmentKeys[i]], &#x2F;&#x2F; 水平居中</p>
+<p>​            },</p>
+<p>​            …sheet[sheetKeys[j]].s </p>
+<p>​          }</p>
+<p>​        </p>
+<p>​        }</p>
+<p>​      }</p>
+<p>​    }</p>
+<p>​	设置我们每行的宽度</p>
+<p>​    const cols &#x3D; []</p>
+<p>​    for (let i &#x3D; 0;i &lt; rowWidth.length;i++) {</p>
+<p>​      cols.push({wch:rowWidth[i]})</p>
+<p>​    }</p>
+<p>​    sheet[‘!cols’] &#x3D; cols</p>
+<p>​    最后将其加入单个簿中</p>
+<p>​    XLSXS.utils.book_append_sheet(workbook, sheet, sheetName[k]) &#x2F;&#x2F; 向 workbook 中添加 sheet</p>
+<p>  }</p>
+<p>最后一步生成xlsx即可</p>
+<p>  XLSXS.writeFile(workbook, fileName)</p>
+<p>}</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
