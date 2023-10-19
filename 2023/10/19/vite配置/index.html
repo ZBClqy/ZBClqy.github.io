@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>vite配置 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">vite配置</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h1 id="vite打包配置"><a href="#vite打包配置" class="headerlink" title="vite打包配置"></a>vite打包配置</h1><h2 id="一、文件目录"><a href="#一、文件目录" class="headerlink" title="一、文件目录"></a>一、文件目录</h2><p>build</p>
+<p>– vite.base.config.js</p>
+<p>– vite.dev.config.js</p>
+<p>– vite.prod.config.js</p>
+<p>index.html</p>
+<p>main.js</p>
+<p>vite.config.js</p>
+<p>和webpack最不同的是vite的入口不是js文件，而是我们的html并且看我们的html引入了上面js文件，所以目录结构也不像webpack需要将html放入public里面</p>
+<h2 id="二、基本结构"><a href="#二、基本结构" class="headerlink" title="二、基本结构"></a>二、基本结构</h2><h3 id="vite-config-js"><a href="#vite-config-js" class="headerlink" title="vite.config.js"></a>vite.config.js</h3><p>import viteBaseConfig from  ‘vite.base.config.js’</p>
+<p>import viteDevConfig from ‘vite.dev.config.js’</p>
+<p>import viteProdConfig from ‘vite.prod.config.js’</p>
+<p>上面我们引入其他的配置文件</p>
+<p>import { defineConfig } from ‘vite’ &#x2F;&#x2F; 引入defineConfig方式配置可以更好的在vscode上获取提示 也是因为对ts的全面支持</p>
+<p>let desipotionObj&#x3D;{	&#x2F;&#x2F;这里我们配置这个对象去区分生成环境和开发环境的打包配置</p>
+<pre><code>    &#39;build&#39;:Object.assign(&#123;&#125;,viteBaseConfig,viteProdConfig)
+
+    &#39;serve&#39;Object.assign(&#123;&#125;,viteBaseConfig,viteDevConfig)
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F;这里我们使用传入一个函数，然后函数会接收一个对象，对象内包含command当前启动是build还是serve 还有一个是mode属性包含当前是development还是production</p>
+<p>const viteConfig&#x3D;defineConfig(({command,mode})&#x3D;&gt;{</p>
+<pre><code>    return desipotionObj[command]
+</code></pre>
+<p>})</p>
+<h3 id="vite-base-config-js"><a href="#vite-base-config-js" class="headerlink" title="vite.base.config.js"></a>vite.base.config.js</h3><p>import  { defineConfig } from ‘vite’</p>
+<p>export default defineConfig({</p>
+<p>})</p>
+<h3 id="vite-dev-config-js"><a href="#vite-dev-config-js" class="headerlink" title="vite.dev.config.js"></a>vite.dev.config.js</h3><p>import  { defineConfig } from ‘vite’</p>
+<p>export default defineConfig({</p>
+<p>})</p>
+<h3 id="vite-prod-config-js"><a href="#vite-prod-config-js" class="headerlink" title="vite.prod.config.js"></a>vite.prod.config.js</h3><p>import  { defineConfig } from ‘vite’</p>
+<p>export default defineConfig({</p>
+<p>})</p>
+<h2 id="三、配置环境变量"><a href="#三、配置环境变量" class="headerlink" title="三、配置环境变量"></a>三、配置环境变量</h2><p>import { defineConfig,loadEnv } from ‘vite’</p>
+<p>export default defineConfig(({mode})&#x3D;&gt;{</p>
+<pre><code>        loadEnv(mode,proccess.cwd()), //这里会根据你的mode去找到对应的环境变量文件
+
+        envPrefix:&#39;TEXT_&#39;  这个可以改变默认的环境变量开头
+</code></pre>
+<p>})</p>
+<h3 id="env"><a href="#env" class="headerlink" title=".env"></a>.env</h3><p>VITE_ZBC&#x3D;666</p>
+<h3 id="env-production"><a href="#env-production" class="headerlink" title=".env.production"></a>.env.production</h3><p>VITE_LQY&#x3D;520</p>
+<h3 id="env-development"><a href="#env-development" class="headerlink" title=".env.development"></a>.env.development</h3><p>VITE_ZZZ&#x3D;1314</p>
+<p>我们的环境变量默认都要使用VITE_开头</p>
+<p>如果要在我们的js或者vue中访问环境变量我们可以使用import.mate.env</p>
+<h2 id="四、css与less、sass的配置"><a href="#四、css与less、sass的配置" class="headerlink" title="四、css与less、sass的配置"></a>四、css与less、sass的配置</h2><p>import { defineConfig } from ‘vite’</p>
+<p>export default defineConfig({</p>
+<pre><code>    css:&#123;
+
+        modules:&#123;
+
+            //localsConvention可以配置css模块化返回的对象是驼峰还是下划线如果有带only就是驼峰，如下的是下划线
+
+            localsConvention:&quot;camelCase&quot; ，
+
+            //scopeBehaviour可以配置当前模块化属于全局还是自身的local属于自身global属于全局
+
+            scopeBehaviour:&quot;local&quot;,
+
+            //hashPrefix可以让其转换的hash值随机添加我们后面设置的字符串达到更高的不同
+
+            hashPrefix:&quot;hello&quot;，
+
+            //globalModulePaths可以配置我们不想包含模块化的css文件
+
+            globalModulePaths:[ &quot;css路径&quot; ]
+
+        &#125;,
+
+        //我们可以在preprocessorOptions中配置我们的less和sass等预编译语言
+
+        preprocessorOptions:&#123;
+
+            less:&#123;
+
+                    //math的always可以让我们的less中写的数值可以运算
+
+                    math:&quot;always&quot;,
+
+                    //globalVars可以让我们设置全局的变量共所有的less访问
+
+                    globalVars:&#123;
+
+                            color:&quot;white&quot;
+</code></pre>
+<p>}</p>
+<pre><code>                    //additionalData中配置是我们全局使用的less路径
+
+                    additionalData:less路径
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F;sass的配置和上面less的类似</p>
+<p>}</p>
+<p>}</p>
+<p>})</p>
+<h2 id="五、postcss的配置"><a href="#五、postcss的配置" class="headerlink" title="五、postcss的配置"></a>五、postcss的配置</h2><p>在vite内是完全兼容postcss的，我们只需要安装一个postcss-preset-env来配置一些我们的postcss预处理，确认我们postcss默认都要干那些事情</p>
+<p>import  { defineConfig }  from  ‘vite’	</p>
+<p>&#x2F;&#x2F;首先导入我们安装的postcss-preset-env 默认需要postcss处理的配置预选项</p>
+<p>import  postcssPresetEnv from ‘postcss-preset-env’</p>
+<p>export default&#x3D;defineConfig({</p>
+<pre><code>//然后配置我们的postcss 里面的plugins数组将我们的导入的postcssPresetEnv放入即可	
+
+    postcss:&#123;
+
+            plugins:[ 
+
+                postcssPresetEnv ()
+</code></pre>
+<p>]</p>
+<p>}</p>
+<p>})</p>
+<h3 id="postcss-config-js"><a href="#postcss-config-js" class="headerlink" title="postcss.config.js"></a>postcss.config.js</h3><p>我们也可以去使用单独的postcss.config.js,vite会自动的去寻找个根目录下的这个文件并读取里面对于postcss的配置。</p>
+<p>const postcssPresetEnv&#x3D;require(‘postcss-preset-env’);</p>
+<p>module.exports&#x3D;{</p>
+<pre><code>    plugins:[
+
+        postcssPresetEnv()
+</code></pre>
+<p>]</p>
+<p>}</p>
+<h2 id="六、resolve相对路径的配置"><a href="#六、resolve相对路径的配置" class="headerlink" title="六、resolve相对路径的配置"></a>六、resolve相对路径的配置</h2><p>import { defineConfig } from ‘vite’</p>
+<p>&#x2F;&#x2F;我们先导入commonjs的path模块的resolve方法</p>
+<p>import { resolve } from ‘path’</p>
+<p>export default&#x3D;defineConfig({</p>
+<p>&#x2F;&#x2F;然后我们配置resolve的alias对象属性在里面指定我们特定的相对路径</p>
+<pre><code>    resolve:&#123;
+
+        alias:&#123;
+
+            &quot;@&quot;:resolve(__dirname,&quot;../&quot;)
+</code></pre>
+<p>}</p>
+<p>}</p>
+<p>})</p>
+<h2 id="七、生产环境build的配置"><a href="#七、生产环境build的配置" class="headerlink" title="七、生产环境build的配置"></a>七、生产环境build的配置</h2><p>import { defineConfig } from ‘vite’</p>
+<p>export default&#x3D;defineConfig({</p>
+<pre><code>    build:&#123;
+</code></pre>
+<p>&#x2F;&#x2F;因为我们vite在打包生产环境是依赖我们的rollup的，因为开箱即用所以vite自己配置了一套默认的配置，如果我们要修改就要在rollupOptions对象属性去配置一些特有的属性</p>
+<pre><code>        rollupOptions:&#123;
+
+            output:&#123;
+
+                    assetFileName:&quot;[hash].[name].[ext]&quot;
+</code></pre>
+<p>}</p>
+<p>},</p>
+<p>&#x2F;&#x2F;assetInlineLimit可以帮我们去分辨如果小于后面给的值的静态文件帮我们转换为base64</p>
+<pre><code>        assetInlineLimit:xxx,
+</code></pre>
+<p>&#x2F;&#x2F;outDir可以让我们去配置打包好的文件存放的文件名</p>
+<pre><code>        outDir:xxx，
+</code></pre>
+<p>&#x2F;&#x2F;assetsDir可以让我们去配置js存放目录的名称</p>
+<pre><code>        assetsDir:&quot;&quot;
+</code></pre>
+<p>}</p>
+<p>})</p>
+<h2 id="八、svg的配置和导入资源的路径配置"><a href="#八、svg的配置和导入资源的路径配置" class="headerlink" title="八、svg的配置和导入资源的路径配置"></a>八、svg的配置和导入资源的路径配置</h2><p>vite原生的支持我们的svg无需去做其他的配置。</p>
+<h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><p>我们去导入我们的文件的时候可以在后面添加参数表示其导入格式</p>
+<p>?url 表示按相对的路径给其</p>
+<p>?raw 我们所有的文件在最原始的时候都是二进制流也就是buffer，这里就是将导入文件原生的二进制交出来</p>
+<p>?worker 这里表示导入的文件是一个worker脚本</p>
+<h2 id="九、plugins插件的配置"><a href="#九、plugins插件的配置" class="headerlink" title="九、plugins插件的配置"></a>九、plugins插件的配置</h2><p>import { defineConfig } from ‘vite’</p>
+<p>&#x2F;&#x2F;导入我们所需的插件</p>
+<p>import { xxx } from ‘xxx’</p>
+<p>export default&#x3D;defineConfig({</p>
+<pre><code>    plugins:[
+
+        //里面放置我们需要的插件，插件都是义函数的形式去调用
+
+        如果我们需要指定插件的执行顺序我们需要使用一个大括号将插件调用包起来,并配置一个enforce属性去配置顺序
+</code></pre>
+<p>]</p>
+<p>})</p>
+<p>此外我们还可以自定义插件 ， vite给我们提供了许多的生命周期钩子让我们去设计我们的插件，详情可见官网</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

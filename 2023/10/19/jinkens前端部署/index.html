@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>jinkens前端部署 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">jinkens前端部署</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>jenkins是用java语言开发的 所以首先在服务器安装一个jdk11</p>
+<p>yum -y list java</p>
+<p>然后我们找到jdk11安装</p>
+<p>yum install -y jdk版本</p>
+<h3 id="jenkins"><a href="#jenkins" class="headerlink" title="jenkins"></a>jenkins</h3><p>对呀jenkins我们可以直接去官网下载war包，然后再将其拖入我们的服务器目录中即可</p>
+<p>最后执行 java -jar jenkins.war 就开启我们的服务了</p>
+<p>注意看命令会给我们提供默认密码首次进入jenkins要使用</p>
+<p>然后安装我们的默认插件</p>
+<p>进去后记得设置我们的账户密码</p>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>部署前端项目</p>
+<p>首先我们去jenkins的manage jenkins（管理）里面的plugins去安装我们的node.js插件 ，安装完后到tools里面去找到我们的node.js进行配置</p>
+<p>设置名称 选择node版本 即可</p>
+<p>然后还是到plugins安装我们的git parameter插件</p>
+<p>最后安装我们的publish over ssh插件，安装完后到我们的system系统中去找到其进行配置。</p>
+<p>这里配置名称</p>
+<p>服务器公网ip</p>
+<p>用户名</p>
+<p>路径选择根路径</p>
+<p>然后到高级设置里面勾选使用密码验证，输入我们的服务器密码即可</p>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>输入名称后选择 freestyle project 点击确定进行配置</p>
+<p>这里首先输入说明，然后勾选this project is parameterized使用我们的git parameter插件进行分支配置 </p>
+<p>输入姓名 说明 类型选择branch（分支）然后默认分支输入origin&#x2F;master</p>
+<p>随后配置我们的git</p>
+<p>输入我们clone  git的url</p>
+<p>资质证书 点击添加 用账号密码进行验证然后选择生成secret</p>
+<p>然后新建我们的分支有几个建立几个</p>
+<p>随后往下滑到我们的构建环境，因为刚才配置了node插件这里我们可以根据刚才赋予的node名称选择node进行配置</p>
+<p>最后我们新建构建步骤，在第一个步骤里选择执行shell命令</p>
+<p>npm install</p>
+<p>npm run build</p>
+<p>然后在第二个构建步骤里选择ssh发送文件或执行命令</p>
+<p>首先也是选择我们刚才创建的ssh配置名称</p>
+<p>然后源文件配置下面路径</p>
+<p>dist&#x2F;<em>&#x2F;</em>*</p>
+<p>然后删除我们的源文件路径前面的dist文件夹</p>
+<p>dist</p>
+<p>远程目录选择我们服务器中项目的public即可</p>
+<p>最后保存即可</p>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>这里后端采用的是thinkphp</p>
+<h4 id="新建项目-1"><a href="#新建项目-1" class="headerlink" title="新建项目"></a>新建项目</h4><p>这里与前端的变化在于少了配置node</p>
+<p>在第一个构建中我们使用的是composer不是npm</p>
+<p>composer install</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

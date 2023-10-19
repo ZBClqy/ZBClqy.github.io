@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>首页 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">1.</span>
+        <h2><a href="/2023/10/19/vite%E9%85%8D%E7%BD%AE/">vite配置</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        vite打包配置一、文件目录build
+– vite.base.config.js
+– vite.dev.config.js
+– vite.prod.config.js
+index.html
+main.js
+vite.config.js
+和webpack最不同的是vite的入口不是js文件，而是我们的html并且看我们的html引入了上面js文件，所以...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">2.</span>
+        <h2><a href="/2023/10/19/printJs%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">printJs简单使用</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        import printJs from ‘print-js’
+引入模块
+ printJs({
+​        printable: ‘SheetBalance’, 这里对应我们的dom元素
+​        documentTitle: ‘’,
+​        type: ‘html’, 这里正常我们选择html
+​        css: ‘.&amp;...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">3.</span>
+        <h2><a href="/2023/10/19/xlsx-js-style%E7%9A%84%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/">xlsx-js-style的简单封装</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        import XLSXS from ‘xlsx-js-style’
+引入模块
+export const exportExecl &amp;#x3D; (data,dataTitle,rowWidth,rowAlignment,sheetName,fileName,footerData &amp;#x3D; null)&amp;#x3D;&amp;gt;{
+  const workbo...
+    </div>
+</div>
+
+
+
+<nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2023/">Prev</a><a class="page-number" href="/archives/2023/">1</a><span class="page-number current">2</span>
+</nav>
+
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

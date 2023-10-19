@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>前端手写图片懒加载 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">前端手写图片懒加载</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h1 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h1><p>首先我们需要先获取图片列表</p>
+<p>const images&#x3D;document.querySelectorAll(‘img’)</p>
+<p>然后我们获取图片的数量</p>
+<p>const length&#x3D;images.length</p>
+<p>随后我们开始写监听函数</p>
+<p>const lazyImgFun&#x3D;()&#x3D;&gt;{</p>
+<pre><code>    const count=0
+
+    return (
+
+                function()&#123;
+
+                        const defineIndexArr=[]
+
+                        images.forEach((img,index)=&gt;&#123;
+
+                            const rect=img.getBoundingClientRect()
+
+                            if(rect.top&lt;window.innerHeight)&#123;
+
+                                    img.src=img.dataset.src
+
+                                    defineIndexArr.push(index)
+
+                                    count++
+
+                            &#125;
+
+                         	if(count&gt;=length)&#123;
+
+                                    document.removeEventListener(&#39;scroll&#39;,lazyImgFun)
+
+                            &#125;
+
+                        &#125;)		
+
+            &#125;
+
+    )()
+</code></pre>
+<p>}</p>
+<p>最后监听即可</p>
+<p>document.addEventListener(‘scroll’,lazyImgFun)</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

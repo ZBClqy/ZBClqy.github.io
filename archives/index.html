@@ -47,18 +47,160 @@
 <div class="post-item">
     <div class="post-header">
         <span class="ui-tips post-index">1.</span>
-        <h2><a href="/2023/10/19/xlsx-js-style%E7%9A%84%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85/">xlsx-js-style的简单封装</a></h2>
+        <h2><a href="/2023/10/19/%E5%89%8D%E7%AB%AF%E6%89%8B%E5%86%99%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/">前端手写图片懒加载</a></h2>
         <span class="post-date">2023-10-19</span>
     </div>
     <div class="post-content">
-        import XLSXS from ‘xlsx-js-style’
-引入模块
-export const exportExecl &amp;#x3D; (data,dataTitle,rowWidth,rowAlignment,sheetName,fileName,footerData &amp;#x3D; null)&amp;#x3D;&amp;gt;{
-  const workbo...
+        图片懒加载首先我们需要先获取图片列表
+const images&amp;#x3D;document.querySelectorAll(‘img’)
+然后我们获取图片的数量
+const length&amp;#x3D;images.length
+随后我们开始写监听函数
+const lazyImgFun&amp;#x3D;()&amp;#x3D;&amp;gt;{
+    const count...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">2.</span>
+        <h2><a href="/2023/10/19/%E5%89%8D%E7%AB%AFgit-cz%E9%85%8D%E7%BD%AE/">前端git_cz配置</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        git使用git_cz的规范style :标记，空白，格式，缺少分号。。。
+ci:与ci相关的更改
+perf：提高性能的代码更改
+test：添加测试代码
+feat: 添加一项新功能
+fix: 修复错误的bug
+chore: 构建过程或辅助工具的更改
+docs: 文档的更改
+
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">3.</span>
+        <h2><a href="/2023/10/19/%E5%89%8D%E7%AB%AFeslint%E9%85%8D%E7%BD%AE/">前端eslint配置</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        eslint 基本配置rootroot:true
+&amp;#x2F;&amp;#x2F;默认我们的eslint会向上父文件查找eslintrc文件执行其配置对代码进行检查，但是如果父级上真的有而且和我们项目的冲突会造成不必要的麻烦，所有我们设置root:true告诉我们的eslint默认只在当前文件夹中寻找不会向父级文件夹上寻找
+envenv：{
+browser:t...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">4.</span>
+        <h2><a href="/2023/10/19/%E5%89%8D%E7%AB%AFstylelint%E9%85%8D%E7%BD%AE/">前端stylelint配置</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        stylelint的最基本配置我们使用stylelint要完成最基本的css检测配置，如下
+安装pnpm add postcss postcss-html stylelint  stylelint-config-standard stylelint-config-standard-vue stylelint-order
+配置文件（.stylelintr...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">5.</span>
+        <h2><a href="/2023/10/19/%E5%89%8D%E7%AB%AFhusky/">前端husky</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        husky安装pnpm add husky
+安装完后package.json就会出现”prepare”:”husky install”这时候我们执行下
+pnpm prepare
+执行完就会出现一个.husky文件
+我们之所以配置husky就是为了以防小白没有去配置我们的eslint和stylelint的自动保存修改格式，或者遗漏一些文件的格式检测所以我...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">6.</span>
+        <h2><a href="/2023/10/19/php-rpc/">php_rpc</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        php项目之间使用rpc通信rpc 也就是我们的远程过程函数调用，用白话说就像调用本地的方法一样调用远程服务上的方法
+yar这里我们推荐使用Yar，在php官方文档中我们就可以看到详细的介绍了
+https://www.php.net/manual/zh/intro.yar.php
+下面是在tp6中使用的例子
+首先我们需要下载php对于yar的扩展，这里...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">7.</span>
+        <h2><a href="/2023/10/19/php%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">php消息队列</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        thinkphp做秒杀做秒杀首先我们就要知道mq也就是我们的消息队列，这是现在一般流行也是我们传统采用的方式
+首先我们需要安装一个关于thinkphp的扩展也就是我们的think-queue
+thinkphp-queue这是官网提供的一个消息队列服务，他支持我们的消息队列的常规操作
+消息的发布 获取 执行 删除 重发 失败处理 延迟执行 超时控制等
+队...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">8.</span>
+        <h2><a href="/2023/10/19/php%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBphinx%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">php数据迁移phinx库的使用</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        数据库迁移数据库迁移是为了保证多人开发时如果对数据库的更改，可以更好的去多人同步数据库
+phinx这个库是在php任何框架都可以使用的数据库迁移库
+下载1composer require robmorgan/phinx
+
+初始化1vendor/bin/phinx init
+
+这里还需要在我们的框架内建立目录结构，在我们的根目录下建立db文件夹，然后在d...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">9.</span>
+        <h2><a href="/2023/10/19/jinkens%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2/">jinkens前端部署</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        部署jenkins是用java语言开发的 所以首先在服务器安装一个jdk11
+yum -y list java
+然后我们找到jdk11安装
+yum install -y jdk版本
+jenkins对呀jenkins我们可以直接去官网下载war包，然后再将其拖入我们的服务器目录中即可
+最后执行 java -jar jenkins.war 就开启我们的服务...
+    </div>
+</div>
+
+<div class="post-item">
+    <div class="post-header">
+        <span class="ui-tips post-index">10.</span>
+        <h2><a href="/2023/10/19/composer%E6%89%93%E5%8C%85/">composer打包</a></h2>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    <div class="post-content">
+        构建composer包一、建立composer.json文件{    “name”: “xlsx&amp;#x2F;array”, &amp;#x2F;&amp;#x2F;包的名称    “description”: “xlsx&amp;#x2F;array - Read, Create and Write Spreadsheet documents in PHP - Spreads...
     </div>
 </div>
 
 
+
+<nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next</a>
+</nav>
 
 
         </div>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>前端eslint配置 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">前端eslint配置</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h1 id="eslint-基本配置"><a href="#eslint-基本配置" class="headerlink" title="eslint 基本配置"></a>eslint 基本配置</h1><h2 id="root"><a href="#root" class="headerlink" title="root"></a>root</h2><p>root:true</p>
+<p>&#x2F;&#x2F;默认我们的eslint会向上父文件查找eslintrc文件执行其配置对代码进行检查，但是如果父级上真的有而且和我们项目的冲突会造成不必要的麻烦，所有我们设置root:true告诉我们的eslint默认只在当前文件夹中寻找不会向父级文件夹上寻找</p>
+<h2 id="env"><a href="#env" class="headerlink" title="env"></a>env</h2><p>env：{</p>
+<pre><code>browser:true, 浏览器
+
+commonjs:true, 
+
+node:true, nodejs
+
+es6:true	
+</code></pre>
+<p>}</p>
+<p>我们在可能在代码中会使用各种各样版本的js而这些版本的运行环境是不一样的有的是浏览器有的是node所以我们需要向上面一样将想要适配的环境开启，以防eslint检测该环境没有其变量属性。</p>
+<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>extends:[“plugin:vue&#x2F;base”,”eslint:recommended”]</p>
+<p>我们在eslint是可以去继承规则引用包的，里面内置了许多配置好的规则，比如我们的eslint:recommended里面内置了七十条左右的常用规则，我们默认将其继承引用而且它是内置的无需下载，像我们的plugin:vue&#x2F;base其实是引用了eslint-plugin-vue包，在vue项目中我们需要引入这个包，因为我们的eslint默认是只会对js文件和规则进行处理而不会对我们的vue文件和规则进行处理。</p>
+<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><p>plugins:[“vue”]</p>
+<p>我们在plugins内显示的说明了我们都继承了那些包，比如上面我们继承了eslint-plugin-vue包我们就在plugins中写入数组vue这里可以省略前面的eslint-plugin</p>
+<h2 id="parser"><a href="#parser" class="headerlink" title="parser"></a>parser</h2><p>parser:”vue-eslint-parser”</p>
+<p>我们前面在extends就说到eslint无法解析除了js外的格式文件，前面我们继承了plugin-eslint-vue来规范我们的vue但是没有解析器,这里我们就需要使用我们的vue-eslint-parser第三方包解析器来解析我们vue让其可以让eslint读取并检查规范。</p>
+<h2 id="parserOptions"><a href="#parserOptions" class="headerlink" title="parserOptions"></a>parserOptions</h2><p>parserOptions:{</p>
+<pre><code>sourceType:&quot;module&quot;,
+
+ecmaVersion:10,
+
+parser:&quot;babel-eslint&quot;
+</code></pre>
+<p>}</p>
+<p>我们前面使用了vue-eslint-parser解析器，我们可以在其parserOptions进行更细致的配置，我们用sourceType配置我们js来源默认是script但是我们在vue项目中都是使用的模块化所以我们使用module，然后ecmaVersion来设置我们的js语法的版本，最后前面我们将其解析器设置成vue-eslint-parser但是不是所有的文件都是vue还是会有我们的js而且js文件而且js最新的语法可能eslint不兼容，这时候就要在我们的parserOptions里面在配置一个parser用于解析我们的js和其高级的语法。</p>
+<h2 id="globals"><a href="#globals" class="headerlink" title="globals"></a>globals</h2><p>globals：{</p>
+<pre><code>document:true,
+
+navigator:true,
+
+window:true
+</code></pre>
+<p>}</p>
+<p>我们的eslint有点死板的会去查看使用的变量是否定义如果未定义就报错，包括我们内置的全局变量属性也不放过。所以我们就要使用globals去声明我们要使用的内置全局变量属性表示我们要使用不进行检测。</p>
+<h2 id="rules"><a href="#rules" class="headerlink" title="rules"></a>rules</h2><p>我们可以在里面配置我们的检测规则<br>‘no-console’: ‘off’,<br>        semi: [‘error’, ‘never’], &#x2F;&#x2F; 禁止分号<br>        quotes: [‘error’, ‘single’], &#x2F;&#x2F; 使用单引号<br>        indent: [‘error’, 4], &#x2F;&#x2F; 4格缩进-js<br>        &#x2F;&#x2F; “vue&#x2F;no-parsing-error”: [“error”, {<br>        &#x2F;&#x2F;     “invalid-first-character-of-tag-name”: false<br>        &#x2F;&#x2F; }],<br>        ‘vue&#x2F;no-parsing-error’: ‘off’,<br>        ‘vue&#x2F;html-indent’: [‘error’, 4], &#x2F;&#x2F; 4格缩进-html<br>        ‘vue&#x2F;no-reserved-keys’: [‘error’], &#x2F;&#x2F; 禁止使用保留字段<br>        ‘vue&#x2F;max-attributes-per-line’: ‘off’, &#x2F;&#x2F; 标签不强制换换行<br>        ‘vue&#x2F;singleline-html-element-content-newline’: ‘off’, &#x2F;&#x2F; 标签内容不强制换行<br>        ‘vue&#x2F;html-closing-bracket-spacing’: ‘off’, &#x2F;&#x2F; 标签结束不强制空格<br>        ‘vue&#x2F;no-use-v-if-with-v-for’: ‘off’,<br>        ‘no-control-regex’: 0,<br>        &#x2F;&#x2F;  “vue&#x2F;component-definition-name-casing”: [“error”, “PascalCase”] &#x2F;&#x2F; 组件名称<br>        &#x2F;&#x2F;  “vue&#x2F;script-indent”: [2, “tab”, { baseIndent: 1 }],<br>        &#x2F;&#x2F;  “vue&#x2F;html-indent”: [2, “tab”, { baseIndent: 1 }],<br>        &#x2F;&#x2F;  “no-undef”: 2, &#x2F;&#x2F;不可以有未声明的变量<br>        &#x2F;&#x2F;  “no-redeclare”: 2, &#x2F;&#x2F;禁止重复声明变量<br>        &#x2F;&#x2F;  semi: [2, “always”], &#x2F;&#x2F;语句强制分号结尾<br>        &#x2F;&#x2F;  “no-func-assign”: 2, &#x2F;&#x2F;禁止重复的函数声明<br>        &#x2F;&#x2F;  &#x2F;&#x2F; “spaced-comment”: 2, &#x2F;&#x2F;注释前要有空格<br>        &#x2F;&#x2F;  “arrow-spacing”: [2, { before: true, after: true }], &#x2F;&#x2F;箭头前后括号<br>        ‘block-spacing’: [2, ‘always’], &#x2F;&#x2F; 块级作用域缩进<br>        &#x2F;&#x2F;  “brace-style”: [2, “1tbs”, { allowSingleLine: true }], &#x2F;&#x2F; 大括号风格，允许写在一行<br>        &#x2F;&#x2F;  “comma-spacing”: [2, { before: false, after: true }], &#x2F;&#x2F; 逗号前后的空格<br>        &#x2F;&#x2F;  “comma-style”: [2, “last”], &#x2F;&#x2F; 逗号风格，换行时在行首还是行尾<br>        &#x2F;&#x2F;  “eol-last”: 2, &#x2F;&#x2F; 文件以单一的换行符结束<br>        &#x2F;&#x2F;  eqeqeq: [2, “allow-null”], &#x2F;&#x2F; 必须使用全等<br>        &#x2F;&#x2F;  “generator-star-spacing”: [2, { before: true, after: true }], &#x2F;&#x2F; generate函数的前后空格<br>        &#x2F;&#x2F;  indent: [2, 2, { SwitchCase: 1 }], &#x2F;&#x2F; 缩进风格，switch缩进风格<br>        &#x2F;&#x2F;  “jsx-quotes”: [2, “prefer-single”], &#x2F;&#x2F; jsx使用单引号<br>        &#x2F;&#x2F;  “key-spacing”: [2, { beforeColon: false, afterColon: true }], &#x2F;&#x2F; 对象字面量中冒号添加后空格<br>        ‘keyword-spacing’: [2, { before: true, after: true }], &#x2F;&#x2F; 关键字前后空格<br>        &#x2F;&#x2F;  “new-parens”: 2, &#x2F;&#x2F; new时必须加小括号<br>        &#x2F;&#x2F;  “no-cond-assign”: 2, &#x2F;&#x2F; 禁止在条件表达式中使用赋值语句<br>        &#x2F;&#x2F;  “no-dupe-args”: 2, &#x2F;&#x2F;函数参数不能重复<br>        &#x2F;&#x2F;  “no-dupe-class-members”: 2, &#x2F;&#x2F;对象成员不能重复<br>        &#x2F;&#x2F;  “no-duplicate-case”: 2, &#x2F;&#x2F;switch中的case标签不能重复<br>        &#x2F;&#x2F;  “no-empty-pattern”: 2, &#x2F;&#x2F; 禁止空解构<br>        &#x2F;&#x2F;  “no-eval”: 2, &#x2F;&#x2F;禁止使用eval<br>        &#x2F;&#x2F;  “no-extra-parens”: [2, “functions”], &#x2F;&#x2F;禁止非必要的括号<br>        &#x2F;&#x2F;  “no-func-assign”: 2, &#x2F;&#x2F;禁止重复的函数声明<br>        &#x2F;&#x2F;  “no-invalid-regexp”: 2, &#x2F;&#x2F;禁止无效的正则表达式<br>        &#x2F;&#x2F;  “no-irregular-whitespace”: 2, &#x2F;&#x2F;不能有不规则的空格<br>        &#x2F;&#x2F;  “no-mixed-spaces-and-tabs”: 2, &#x2F;&#x2F;禁止混用tab和空格<br>        &#x2F;&#x2F;  “no-multi-spaces”: [2, { ignoreEOLComments: true }], &#x2F;&#x2F;不能用多余的空格<br>        ‘no-multiple-empty-lines’: [2, { max: 1 }], &#x2F;&#x2F; 空行最多不能超过2行<br>        &#x2F;&#x2F;  “no-redeclare”: 2, &#x2F;&#x2F;禁止重复声明变量<br>        &#x2F;&#x2F;  “no-regex-spaces”: 2, &#x2F;&#x2F;禁止在正则表达式字面量中使用多个空格<br>        &#x2F;&#x2F;  “no-trailing-spaces”: 2, &#x2F;&#x2F;一行结束后面不要有空格<br>        &#x2F;&#x2F;  “no-undef”: 2, &#x2F;&#x2F;不能有未定义的变量<br>        &#x2F;&#x2F;  “no-whitespace-before-property”: 2, &#x2F;&#x2F; 对象键之前无空格<br>        &#x2F;&#x2F;  “operator-linebreak”: [2, “after”, { overrides: { “?”: “before”, “:”: “before” } }], &#x2F;&#x2F;换行时运算符在行尾还是行首<br>        &#x2F;&#x2F;  “padded-blocks”: [2, “never”], &#x2F;&#x2F;块语句内行首行尾不能空行<br>        &#x2F;&#x2F;  “semi-spacing”: [2, { before: false, after: true }], &#x2F;&#x2F;分号前后空格<br>        ‘space-before-blocks’: [2, ‘always’], &#x2F;&#x2F; 不以新行开始的块{前面需要有空格<br>        ‘space-before-function-paren’: [2, ‘always’], &#x2F;&#x2F; 函数定义时括号前面需要有空格<br>        &#x2F;&#x2F;  “space-in-parens”: [2, “never”], &#x2F;&#x2F;小括号里面不需要有空格<br>        ‘space-infix-ops’: 2,&#x2F;&#x2F; 中缀操作符周围需要有空格<br>        ‘vue&#x2F;multi-word-component-names’: 0,<br>        &#x2F;&#x2F;  “space-unary-ops”: [2, { words: true, nonwords: false }], &#x2F;&#x2F;一元运算符的前&#x2F;后要不要加空格<br>        &#x2F;&#x2F;  “spaced-comment”: [<br>        &#x2F;&#x2F;      2,<br>        &#x2F;&#x2F;      “always”,<br>        &#x2F;&#x2F;      { markers: [“global”, “globals”, “eslint”, “eslint-disable”, “*package”, “!”, “,”] },<br>        &#x2F;&#x2F;  ], &#x2F;&#x2F;注释风格需要有空格<br>        &#x2F;&#x2F;  “template-curly-spacing”: [2, “never”], &#x2F;&#x2F;模板中{}包裹的变量不需要空格<br>        &#x2F;&#x2F;  “wrap-iife”: [2, “any”], &#x2F;&#x2F;立即执行函数表达式的小括号风格任意一种都可以<br>        &#x2F;&#x2F;  “yield-star-spacing”: [2, “both”], &#x2F;&#x2F; generate 函数 yeild风格<br>        &#x2F;&#x2F;  &#x2F;&#x2F; “prefer-const”: 2, &#x2F;&#x2F;优先使用const<br>        &#x2F;&#x2F;  “object-curly-spacing”: [2, “always”, { objectsInObjects: false }], &#x2F;&#x2F;大括号内是否允许不必要的空格</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

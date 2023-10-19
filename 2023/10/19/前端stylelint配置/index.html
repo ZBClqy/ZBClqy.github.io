@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>前端stylelint配置 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">前端stylelint配置</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h2 id="stylelint的最基本配置"><a href="#stylelint的最基本配置" class="headerlink" title="stylelint的最基本配置"></a>stylelint的最基本配置</h2><p>我们使用stylelint要完成最基本的css检测配置，如下</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>pnpm add postcss postcss-html stylelint  stylelint-config-standard stylelint-config-standard-vue stylelint-order</p>
+<h3 id="配置文件（-stylelintrc-json）"><a href="#配置文件（-stylelintrc-json）" class="headerlink" title="配置文件（.stylelintrc.json）"></a>配置文件（.stylelintrc.json）</h3><p>{</p>
+<p>  “extends”: [</p>
+<p>   “stylelint-config-standard”,</p>
+<p>   “stylelint-config-standard-vue”</p>
+<p>  ],</p>
+<p>  “plugins”: [“stylelint-order”],</p>
+<p>  “overrides”: [</p>
+<p>   {</p>
+<pre><code>&quot;files&quot;: [&quot;**/*.(html|vue)&quot;],
+
+&quot;customSyntax&quot;: &quot;postcss-html&quot;
+</code></pre>
+<p>   }</p>
+<p>  ],</p>
+<p>  “ignoreFiles”: [</p>
+<p>   “**&#x2F;*.js”,</p>
+<p>   “**&#x2F;*.jsx”,</p>
+<p>   “**&#x2F;*.tsx”,</p>
+<p>   “**&#x2F;*.ts”,</p>
+<p>   “**&#x2F;*.json”,</p>
+<p>   “**&#x2F;*.md”,</p>
+<p>   “**&#x2F;*.yaml”</p>
+<p>  ],</p>
+<p>  “rules”: {</p>
+<p>   “no-descending-specificity”: null, </p>
+<p>   “selector-pseudo-element-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoElements&quot;: [&quot;v-deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “selector-pseudo-class-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoClasses&quot;: [&quot;deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “order&#x2F;properties-order”: [</p>
+<pre><code>&quot;position&quot;,
+
+&quot;top&quot;,
+
+&quot;right&quot;,
+
+&quot;bottom&quot;,
+
+&quot;left&quot;,
+
+&quot;z-index&quot;,
+
+&quot;display&quot;,
+
+&quot;justify-content&quot;,
+
+&quot;align-items&quot;,
+
+&quot;float&quot;,
+
+&quot;clear&quot;,
+
+&quot;overflow&quot;,
+
+&quot;overflow-x&quot;,
+
+&quot;overflow-y&quot;,
+
+&quot;padding&quot;,
+
+&quot;padding-top&quot;,
+
+&quot;padding-right&quot;,
+
+&quot;padding-bottom&quot;,
+
+&quot;padding-left&quot;,
+
+&quot;margin&quot;,
+
+&quot;margin-top&quot;,
+
+&quot;margin-right&quot;,
+
+&quot;margin-bottom&quot;,
+
+&quot;margin-left&quot;,
+
+&quot;width&quot;,
+
+&quot;min-width&quot;,
+
+&quot;max-width&quot;,
+
+&quot;height&quot;,
+
+&quot;min-height&quot;,
+
+&quot;max-height&quot;,
+
+&quot;font-size&quot;,
+
+&quot;font-family&quot;,
+
+&quot;text-align&quot;,
+
+&quot;text-justify&quot;,
+
+&quot;text-indent&quot;,
+
+&quot;text-overflow&quot;,
+
+&quot;text-decoration&quot;,
+
+&quot;white-space&quot;,
+
+&quot;color&quot;,
+
+&quot;background&quot;,
+
+&quot;background-position&quot;,
+
+&quot;background-repeat&quot;,
+
+&quot;background-size&quot;,
+
+&quot;background-color&quot;,
+
+&quot;background-clip&quot;,
+
+&quot;border&quot;,
+
+&quot;border-style&quot;,
+
+&quot;border-width&quot;,
+
+&quot;border-color&quot;,
+
+&quot;border-top-style&quot;,
+
+&quot;border-top-width&quot;,
+
+&quot;border-top-color&quot;,
+
+&quot;border-right-style&quot;,
+
+&quot;border-right-width&quot;,
+
+&quot;border-right-color&quot;,
+
+&quot;border-bottom-style&quot;,
+
+&quot;border-bottom-width&quot;,
+
+&quot;border-bottom-color&quot;,
+
+&quot;border-left-style&quot;,
+
+&quot;border-left-width&quot;,
+
+&quot;border-left-color&quot;,
+
+&quot;border-radius&quot;,
+
+&quot;opacity&quot;,
+
+&quot;filter&quot;,
+
+&quot;list-style&quot;,
+
+&quot;outline&quot;,
+
+&quot;visibility&quot;,
+
+&quot;box-shadow&quot;,
+
+&quot;text-shadow&quot;,
+
+&quot;resize&quot;,
+
+&quot;transition&quot;
+</code></pre>
+<p>   ]</p>
+<p>  }</p>
+<p> }</p>
+<h2 id="stylelint与sass的基本配置"><a href="#stylelint与sass的基本配置" class="headerlink" title="stylelint与sass的基本配置"></a>stylelint与sass的基本配置</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>pnpm add postcss postcss-html stylelint  stylelint-config-standard stylelint-config-standard-vue stylelint-order  stylelint-config-recommended-scss stylelint-config-recess-order stylelint-config-standard-scss postcss-scss</p>
+<h3 id="配置文件（-stylelintrc-json）-1"><a href="#配置文件（-stylelintrc-json）-1" class="headerlink" title="配置文件（.stylelintrc.json）"></a>配置文件（.stylelintrc.json）</h3><p>{</p>
+<p>  “extends”: [</p>
+<p>   “stylelint-config-standard”,</p>
+<p>   “stylelint-config-standard-vue”,</p>
+<p>   “stylelint-config-recommended-vue&#x2F;scss”,</p>
+<p>   “stylelint-config-standard-scss”,</p>
+<p>   “stylelint-config-recess-order”</p>
+<p>  ],</p>
+<p>  “plugins”: [“stylelint-order”],</p>
+<p>  “overrides”: [</p>
+<p>   {</p>
+<pre><code>&quot;files&quot;:[&quot;**/*.(scss|css|vue|html)&quot;], 
+
+&quot;customSyntax&quot;: &quot;postcss-scss&quot;
+</code></pre>
+<p>   },</p>
+<p>   {</p>
+<pre><code>&quot;files&quot;: [&quot;**/*.(html|vue)&quot;],
+
+&quot;customSyntax&quot;: &quot;postcss-html&quot;
+</code></pre>
+<p>   }</p>
+<p>  ],</p>
+<p>  “ignoreFiles”: [</p>
+<p>   “**&#x2F;*.js”,</p>
+<p>   “**&#x2F;*.jsx”,</p>
+<p>   “**&#x2F;*.tsx”,</p>
+<p>   “**&#x2F;*.ts”,</p>
+<p>   “**&#x2F;*.json”,</p>
+<p>   “**&#x2F;*.md”,</p>
+<p>   “**&#x2F;*.yaml”</p>
+<p>  ],</p>
+<p>  “rules”: {</p>
+<p>   “no-descending-specificity”: null, </p>
+<p>   “selector-pseudo-element-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoElements&quot;: [&quot;v-deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “selector-pseudo-class-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoClasses&quot;: [&quot;deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “order&#x2F;properties-order”: [</p>
+<pre><code>&quot;position&quot;,
+
+&quot;top&quot;,
+
+&quot;right&quot;,
+
+&quot;bottom&quot;,
+
+&quot;left&quot;,
+
+&quot;z-index&quot;,
+
+&quot;display&quot;,
+
+&quot;justify-content&quot;,
+
+&quot;align-items&quot;,
+
+&quot;float&quot;,
+
+&quot;clear&quot;,
+
+&quot;overflow&quot;,
+
+&quot;overflow-x&quot;,
+
+&quot;overflow-y&quot;,
+
+&quot;padding&quot;,
+
+&quot;padding-top&quot;,
+
+&quot;padding-right&quot;,
+
+&quot;padding-bottom&quot;,
+
+&quot;padding-left&quot;,
+
+&quot;margin&quot;,
+
+&quot;margin-top&quot;,
+
+&quot;margin-right&quot;,
+
+&quot;margin-bottom&quot;,
+
+&quot;margin-left&quot;,
+
+&quot;width&quot;,
+
+&quot;min-width&quot;,
+
+&quot;max-width&quot;,
+
+&quot;height&quot;,
+
+&quot;min-height&quot;,
+
+&quot;max-height&quot;,
+
+&quot;font-size&quot;,
+
+&quot;font-family&quot;,
+
+&quot;text-align&quot;,
+
+&quot;text-justify&quot;,
+
+&quot;text-indent&quot;,
+
+&quot;text-overflow&quot;,
+
+&quot;text-decoration&quot;,
+
+&quot;white-space&quot;,
+
+&quot;color&quot;,
+
+&quot;background&quot;,
+
+&quot;background-position&quot;,
+
+&quot;background-repeat&quot;,
+
+&quot;background-size&quot;,
+
+&quot;background-color&quot;,
+
+&quot;background-clip&quot;,
+
+&quot;border&quot;,
+
+&quot;border-style&quot;,
+
+&quot;border-width&quot;,
+
+&quot;border-color&quot;,
+
+&quot;border-top-style&quot;,
+
+&quot;border-top-width&quot;,
+
+&quot;border-top-color&quot;,
+
+&quot;border-right-style&quot;,
+
+&quot;border-right-width&quot;,
+
+&quot;border-right-color&quot;,
+
+&quot;border-bottom-style&quot;,
+
+&quot;border-bottom-width&quot;,
+
+&quot;border-bottom-color&quot;,
+
+&quot;border-left-style&quot;,
+
+&quot;border-left-width&quot;,
+
+&quot;border-left-color&quot;,
+
+&quot;border-radius&quot;,
+
+&quot;opacity&quot;,
+
+&quot;filter&quot;,
+
+&quot;list-style&quot;,
+
+&quot;outline&quot;,
+
+&quot;visibility&quot;,
+
+&quot;box-shadow&quot;,
+
+&quot;text-shadow&quot;,
+
+&quot;resize&quot;,
+
+&quot;transition&quot;
+</code></pre>
+<p>   ]</p>
+<p>  }</p>
+<p> }</p>
+<h2 id="stylelint与less的基本配置"><a href="#stylelint与less的基本配置" class="headerlink" title="stylelint与less的基本配置"></a>stylelint与less的基本配置</h2><h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><p>pnpm add postcss postcss-html stylelint  stylelint-config-standard stylelint-config-standard-vue stylelint-order postcss-less stylelint-config-recommended-less</p>
+<h3 id="配置文件（-stylelintrc-json）-2"><a href="#配置文件（-stylelintrc-json）-2" class="headerlink" title="配置文件（.stylelintrc.json）"></a>配置文件（.stylelintrc.json）</h3><p>{</p>
+<p>  “extends”: [</p>
+<p>   “stylelint-config-standard”,</p>
+<p>   “stylelint-config-standard-vue”,</p>
+<p>   “stylelint-config-recommended-less”,</p>
+<p>   “stylelint-config-recess-order”</p>
+<p>  ],</p>
+<p>  “plugins”: [“stylelint-order”],</p>
+<p>  “overrides”: [</p>
+<p>   {</p>
+<pre><code>&quot;files&quot;:[&quot;**/*.(less|css|vue|html)&quot;], 
+
+&quot;customSyntax&quot;: &quot;postcss-less&quot;
+</code></pre>
+<p>   },</p>
+<p>   {</p>
+<pre><code>&quot;files&quot;: [&quot;**/*.(html|vue)&quot;],
+
+&quot;customSyntax&quot;: &quot;postcss-html&quot;
+</code></pre>
+<p>   }</p>
+<p>  ],</p>
+<p>  “ignoreFiles”: [</p>
+<p>   “**&#x2F;*.js”,</p>
+<p>   “**&#x2F;*.jsx”,</p>
+<p>   “**&#x2F;*.tsx”,</p>
+<p>   “**&#x2F;*.ts”,</p>
+<p>   “**&#x2F;*.json”,</p>
+<p>   “**&#x2F;*.md”,</p>
+<p>   “**&#x2F;*.yaml”</p>
+<p>  ],</p>
+<p>  “rules”: {</p>
+<p>   “no-descending-specificity”: null, </p>
+<p>   “selector-pseudo-element-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoElements&quot;: [&quot;v-deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “selector-pseudo-class-no-unknown”: [</p>
+<pre><code>true,
+
+&#123;
+
+ &quot;ignorePseudoClasses&quot;: [&quot;deep&quot;]
+
+&#125;
+</code></pre>
+<p>   ],</p>
+<p>   “order&#x2F;properties-order”: [</p>
+<pre><code>&quot;position&quot;,
+
+&quot;top&quot;,
+
+&quot;right&quot;,
+
+&quot;bottom&quot;,
+
+&quot;left&quot;,
+
+&quot;z-index&quot;,
+
+&quot;display&quot;,
+
+&quot;justify-content&quot;,
+
+&quot;align-items&quot;,
+
+&quot;float&quot;,
+
+&quot;clear&quot;,
+
+&quot;overflow&quot;,
+
+&quot;overflow-x&quot;,
+
+&quot;overflow-y&quot;,
+
+&quot;padding&quot;,
+
+&quot;padding-top&quot;,
+
+&quot;padding-right&quot;,
+
+&quot;padding-bottom&quot;,
+
+&quot;padding-left&quot;,
+
+&quot;margin&quot;,
+
+&quot;margin-top&quot;,
+
+&quot;margin-right&quot;,
+
+&quot;margin-bottom&quot;,
+
+&quot;margin-left&quot;,
+
+&quot;width&quot;,
+
+&quot;min-width&quot;,
+
+&quot;max-width&quot;,
+
+&quot;height&quot;,
+
+&quot;min-height&quot;,
+
+&quot;max-height&quot;,
+
+&quot;font-size&quot;,
+
+&quot;font-family&quot;,
+
+&quot;text-align&quot;,
+
+&quot;text-justify&quot;,
+
+&quot;text-indent&quot;,
+
+&quot;text-overflow&quot;,
+
+&quot;text-decoration&quot;,
+
+&quot;white-space&quot;,
+
+&quot;color&quot;,
+
+&quot;background&quot;,
+
+&quot;background-position&quot;,
+
+&quot;background-repeat&quot;,
+
+&quot;background-size&quot;,
+
+&quot;background-color&quot;,
+
+&quot;background-clip&quot;,
+
+&quot;border&quot;,
+
+&quot;border-style&quot;,
+
+&quot;border-width&quot;,
+
+&quot;border-color&quot;,
+
+&quot;border-top-style&quot;,
+
+&quot;border-top-width&quot;,
+
+&quot;border-top-color&quot;,
+
+&quot;border-right-style&quot;,
+
+&quot;border-right-width&quot;,
+
+&quot;border-right-color&quot;,
+
+&quot;border-bottom-style&quot;,
+
+&quot;border-bottom-width&quot;,
+
+&quot;border-bottom-color&quot;,
+
+&quot;border-left-style&quot;,
+
+&quot;border-left-width&quot;,
+
+&quot;border-left-color&quot;,
+
+&quot;border-radius&quot;,
+
+&quot;opacity&quot;,
+
+&quot;filter&quot;,
+
+&quot;list-style&quot;,
+
+&quot;outline&quot;,
+
+&quot;visibility&quot;,
+
+&quot;box-shadow&quot;,
+
+&quot;text-shadow&quot;,
+
+&quot;resize&quot;,
+
+&quot;transition&quot;
+</code></pre>
+<p>   ]</p>
+<p>  }</p>
+<p> }</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

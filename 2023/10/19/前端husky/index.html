@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>前端husky - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">前端husky</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h1 id="husky"><a href="#husky" class="headerlink" title="husky"></a>husky</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>pnpm add husky</p>
+<p>安装完后package.json就会出现”prepare”:”husky install”这时候我们执行下</p>
+<p>pnpm prepare</p>
+<p>执行完就会出现一个.husky文件</p>
+<p>我们之所以配置husky就是为了以防小白没有去配置我们的eslint和stylelint的自动保存修改格式，或者遗漏一些文件的格式检测所以我们也需要保证我们的package.json中有完整的格式检测</p>
+<p>eslint的检测配置命令</p>
+<p>“lint”:”eslint . –ext .vue,.js,.ts,.jsx,.tsx”</p>
+<p>stylelint的检测配置命令</p>
+<p>css版本 “lint:style”: “stylelint **&#x2F;*.{html,vue} –custom-syntax postcss-html”</p>
+<p>less版本 “lint:less”: “stylelint &quot;.&#x2F;**&#x2F;*.{css,less,vue,html}&quot;“</p>
+<p>scss版本  “lint:less”: “stylelint &quot;.&#x2F;**&#x2F;*.{css,scss,vue,html}&quot;“</p>
+<p>配置完执行如下命令在.husky文件夹下面生成我们的pre-commit文件也就是git hook中commit之前的钩子</p>
+<p>pnpm husky add .husky&#x2F;pre-commit “pnpm lint &amp;&amp; pnpm lint:style”</p>
+<p>配置完后每次在我们git commit的时候都会去检测我们的代码规范是否符合eslint和stylelint</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+<link rel="stylesheet" href="/styles/base.css">
+
+    
+<link rel="stylesheet" href="/styles/theme.css">
+
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    <title>composer打包 - Hexo</title>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXX');
+    </script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="header-title">
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span class="header-light"></span>
+        <span>Hexo example.com<span>
+    </div>
+    <div class="container">
+        <ul class="nav">
+        
+            <li><a href="/">首页</a></li>
+        
+            <li><a href="/categories/月度报告">月度报告</a></li>
+        
+            <li><a href="/about/">关于</a></li>
+        
+        </ul>
+        <div class="content">
+            <div class="post-container">
+    <div class="post-header">
+        <span class="ui-tips">标题：</span>
+        <h1 class="ui-keyword post-title">composer打包</h1>
+        <span class="post-date">2023-10-19</span>
+    </div>
+    
+    
+    
+    <div class="post-content"><h2 id="构建composer包"><a href="#构建composer包" class="headerlink" title="构建composer包"></a>构建composer包</h2><h3 id="一、建立composer-json文件"><a href="#一、建立composer-json文件" class="headerlink" title="一、建立composer.json文件"></a>一、建立composer.json文件</h3><p>{<br>    “name”: “xlsx&#x2F;array”, &#x2F;&#x2F;包的名称<br>    “description”: “xlsx&#x2F;array - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine”,&#x2F;&#x2F;包的讲解<br>    “keywords”: [&#x2F;&#x2F;该包相关的关键词的数组<br>        “PHP”,<br>        “OpenXML”,<br>        “Excel”,<br>        “xlsx”,<br>        “xls”,<br>        “ods”,<br>        “gnumeric”,<br>        “spreadsheet”<br>    ],<br>    “homepage”: “<a target="_blank" rel="noopener" href="https://github.com/ZBClqy/xlsx-array%22,//github%E5%9C%B0%E5%9D%80">https://github.com/ZBClqy/xlsx-array&quot;,//github地址</a><br>    “type”: “library”,&#x2F;&#x2F;library: 这是默认类型，它会简单的将文件复制到 vendor 目录<br>    “license”: “MIT”,&#x2F;&#x2F;包的许可协议<br>    “authors”: [<br>        {<br>            “name”: “zbc”&#x2F;&#x2F;作者名称<br>        }<br>    ],<br>    “require”: {&#x2F;&#x2F;包的引用依赖和php版本<br>        “php”: “^7.4 || ^8.0”,<br>        “ext-ctype”: “<em>“,<br>        “ext-dom”: “</em>“,<br>        “ext-fileinfo”: “<em>“,<br>        “ext-gd”: “</em>“,<br>        “ext-iconv”: “<em>“,<br>        “ext-libxml”: “</em>“,<br>        “ext-mbstring”: “<em>“,<br>        “ext-simplexml”: “</em>“,<br>        “ext-xml”: “<em>“,<br>        “ext-xmlreader”: “</em>“,<br>        “ext-xmlwriter”: “<em>“,<br>        “ext-zip”: “</em>“,<br>        “ext-zlib”: “*”,<br>        “ezyang&#x2F;htmlpurifier”: “^4.15”,<br>        “maennchen&#x2F;zipstream-php”: “^2.1 || ^3.0”,<br>        “markbaker&#x2F;complex”: “^3.0”,<br>        “markbaker&#x2F;matrix”: “^3.0”,<br>        “psr&#x2F;http-client”: “^1.0”,<br>        “psr&#x2F;http-factory”: “^1.0”,<br>        “psr&#x2F;simple-cache”: “^1.0 || ^2.0 || ^3.0”<br>    },<br>    “minimum-stability”:”dev”,&#x2F;&#x2F;来筛选require包的稳定性<br>    “autoload”: {&#x2F;&#x2F;自动加载命名空间的配置，和指定根目录（命名空间的根路径）<br>        “psr-4”: {<br>            “PhpOffice\PhpSpreadsheet\“: “src&#x2F;PhpSpreadsheet”<br>        }<br>    }<br>}</p>
+<p>二、然后上传到github，这里记得要上传tag</p>
+<p>git tag v3.0</p>
+<p>git push -tag</p>
+</div>
+</div>
+
+        </div>
+        <div class="footer">
+            
+            <p class="footer-links">
+            
+                <a target="_blank" href="https://tinkink.net">&copy; Tinkink</a>
+            
+            </p>
+            
+            <p class="footer-copyright">
+                <span>Powered by <a target="_blank" href="https://hexo.io">Hexo</a></span>
+                <span>Theme <a target="_blank" href="https://github.com/tinkink-co/hexo-theme-terminal">Terminal</a></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
